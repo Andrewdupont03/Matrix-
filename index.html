@@ -5,8 +5,8 @@
 <title>Extraction de données...</title>
 <style>
     body {
-        background-color: black;
-        color: lime;
+        background-color: #000;
+        color: #0f0;
         font-family: monospace;
         display: flex;
         flex-direction: column;
@@ -14,23 +14,100 @@
         align-items: center;
         height: 100vh;
         margin: 0;
+        overflow: hidden;
     }
+
+    h1 {
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #0f0;
+        animation: blink 1.5s infinite;
+    }
+
     #progress {
         font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    /* Barre de progression */
+    #bar {
+        width: 300px;
+        height: 20px;
+        border: 2px solid #0f0;
+        margin-top: 10px;
+        overflow: hidden;
+    }
+
+    #fill {
+        height: 100%;
+        width: 0%;
+        background-color: #0f0;
+        box-shadow: 0 0 15px #0f0;
+    }
+
+    /* Clignotement subtile du titre */
+    @keyframes blink {
+        0% {opacity: 1;}
+        50% {opacity: 0.6;}
+        100% {opacity: 1;}
+    }
+
+    /* Texte aléatoire effet terminal */
+    #log {
+        margin-top: 20px;
+        max-height: 200px;
+        overflow: hidden;
+        width: 90%;
+        text-align: left;
+        font-size: 14px;
+        opacity: 0.8;
     }
 </style>
 </head>
 <body>
+
 <h1>Extraction de données...</h1>
 <div id="progress">0%</div>
 
+<div id="bar">
+    <div id="fill"></div>
+</div>
+
+<div id="log"></div>
+
 <script>
 let progress = 0;
+const logBox = document.getElementById("log");
+const messages = [
+    "Connexion au serveur...",
+    "Analyse des paquets...",
+    "Déchiffrement des données...",
+    "Accès au noyau...",
+    "Synchronisation...",
+    "Extraction des fichiers...",
+    "Chargement terminé."
+];
+
+function addLog() {
+    let msg = "> " + messages[Math.floor(Math.random() * messages.length)];
+    logBox.innerHTML += msg + "<br>";
+    logBox.scrollTop = logBox.scrollHeight;
+}
+
 let interval = setInterval(() => {
-    progress++;
+    progress += Math.floor(Math.random() * 4) + 1; // vitesse variable
+    if (progress > 100) progress = 100;
+
     document.getElementById("progress").textContent = progress + "%";
-    if(progress >= 100) clearInterval(interval);
-}, 50); // 50ms → 0 à 100% en ~5 secondes
+    document.getElementById("fill").style.width = progress + "%";
+
+    addLog();
+
+    if(progress >= 100){
+        clearInterval(interval);
+        addLog();
+    }
+}, 240);
 </script>
+
 </body>
 </html>
