@@ -1,113 +1,167 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Extraction de données...</title>
 <style>
-    body {
-        background-color: #000;
-        color: #0f0;
-        font-family: monospace;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-    }
+  body {
+    background-color: #000;
+    color: #0f0;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
 
-    h1 {
-        margin-bottom: 20px;
-        text-shadow: 0 0 10px #0f0;
-        animation: blink 1.5s infinite;
-    }
+  h1 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0f0;
+    animation: blink 1.5s infinite;
+  }
 
-    #progress {
-        font-size: 2em;
-        margin-bottom: 15px;
-    }
+  @keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0.6;}
+    100% {opacity: 1;}
+  }
 
-    /* Barre de progression */
-    #bar {
-        width: 300px;
-        height: 20px;
-        border: 2px solid #0f0;
-        margin-top: 10px;
-        overflow: hidden;
-    }
+  #progress {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
 
-    #fill {
-        height: 100%;
-        width: 0%;
-        background-color: #0f0;
-        box-shadow: 0 0 15px #0f0;
-    }
+  #bar {
+    width: 300px;
+    height: 20px;
+    border: 2px solid #0f0;
+    margin-top: 10px;
+    overflow: hidden;
+  }
 
-    /* Clignotement subtile du titre */
-    @keyframes blink {
-        0% {opacity: 1;}
-        50% {opacity: 0.6;}
-        100% {opacity: 1;}
-    }
+  #fill {
+    height: 100%;
+    width: 0%;
+    background-color: #0f0;
+    box-shadow: 0 0 15px #0f0;
+    transition: width 0.12s linear;
+  }
 
-    /* Texte aléatoire effet terminal */
-    #log {
-        margin-top: 20px;
-        max-height: 200px;
-        overflow: hidden;
-        width: 90%;
-        text-align: left;
-        font-size: 14px;
-        opacity: 0.8;
-    }
+  #log {
+    margin-top: 20px;
+    max-height: 200px;
+    overflow: hidden;
+    width: 90%;
+    text-align: left;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  /* --- Notification centrée avec titre et message séparé --- */
+  #simpleNotif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -150px);
+    width: 90%;
+    max-width: 350px;
+    min-height: 100px;       /* augmente la hauteur minimale pour le message */
+    box-sizing: border-box;
+    background: #222;
+    color: #fff;
+    padding: 16px;
+    border-radius: 4px;
+    font-family: sans-serif;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    z-index: 9999;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #notifTitle {
+    font-weight: bold;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #fff; /* ligne blanche fine */
+    padding-bottom: 4px;
+  }
+
+  #notifMessage {
+    margin-top: 8px;
+    line-height: 1.4;
+  }
 </style>
 </head>
 <body>
+
+<!-- Notification centrée -->
+<div id="simpleNotif">
+  <div id="notifTitle">ALERTE SYSTÈME</div>
+  <div id="notifMessage">
+    Virus dangereux détecté sur ce périphérique. Cette menace pourrait compromettre toutes vos données et ralentir votre système.
+  </div>
+</div>
 
 <h1>Extraction de données...</h1>
 <div id="progress">0%</div>
 
 <div id="bar">
-    <div id="fill"></div>
+  <div id="fill"></div>
 </div>
 
 <div id="log"></div>
 
 <script>
+/* ==== Fake extraction logs ==== */
 let progress = 0;
 const logBox = document.getElementById("log");
 const messages = [
-    "Connexion au serveur...",
-    "Analyse des paquets...",
-    "Déchiffrement des données...",
-    "Accès au noyau...",
-    "Synchronisation...",
-    "Extraction des fichiers...",
-    "Chargement terminé."
+  "Connexion au serveur...",
+  "Analyse des paquets...",
+  "Déchiffrement des données...",
+  "Accès au noyau...",
+  "Synchronisation...",
+  "Extraction des fichiers...",
+  "Chargement terminé."
 ];
 
 function addLog() {
-    let msg = "> " + messages[Math.floor(Math.random() * messages.length)];
-    logBox.innerHTML += msg + "<br>";
-    logBox.scrollTop = logBox.scrollHeight;
+  let msg = "> " + messages[Math.floor(Math.random() * messages.length)];
+  logBox.innerHTML += msg + "<br>";
+  logBox.scrollTop = logBox.scrollHeight;
 }
 
+/* Progress bar */
 let interval = setInterval(() => {
-    progress += Math.floor(Math.random() * 4) + 1; // vitesse variable
-    if (progress > 100) progress = 100;
+  progress += Math.floor(Math.random() * 3) + 1;
+  if(progress > 100) progress = 100;
+  document.getElementById("progress").textContent = progress + "%";
+  document.getElementById("fill").style.width = progress + "%";
+  addLog();
+  if(progress >= 100){ clearInterval(interval); addLog(); }
+}, 280);
 
-    document.getElementById("progress").textContent = progress + "%";
-    document.getElementById("fill").style.width = progress + "%";
+/* ==== Notification centrée ==== */
+const notif = document.getElementById("simpleNotif");
 
-    addLog();
+// Affiche la notification au centre après 2s
+setTimeout(() => {
+  notif.style.transform = "translate(-50%, -50%)";
+  notif.style.opacity = "1";
+}, 2000);
 
-    if(progress >= 100){
-        clearInterval(interval);
-        addLog();
-    }
-}, 240);
+// Masque après 5s
+setTimeout(() => {
+  notif.style.transform = "translate(-50%, -150px)";
+  notif.style.opacity = "0";
+}, 7000);
 </script>
-
 </body>
 </html>
