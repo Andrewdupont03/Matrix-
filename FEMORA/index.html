@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Femora - Comprendre son corps, vivre son cycle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">Femora</div>
+            <nav>
+                <a href="#accueil">Accueil</a>
+                <a href="#cycle">Mon Cycle</a>
+                <a href="#sante">Santé Intime</a>
+                <a href="#routines">Routines</a>
+                <a href="#recettes">Recettes</a>
+                <a href="#articles">Articles</a>
+                <a href="#premium">Premium</a>
+            </nav>
+            <button class="cta-btn">Suivre mon cycle</button>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>Comprendre son corps, vivre son cycle</h1>
+            <p>Suivi du cycle menstruel, ovulation, bien-être et santé intime</p>
+            <button class="primary-btn">Commencer gratuitement</button>
+        </div>
+    </section>
+
+    <section id="calculateur">
+        <div class="container">
+            <div class="calc-card">
+                <h2>Calculateur de Cycle</h2>
+                <p class="calc-subtitle">Découvrez où vous en êtes dans votre cycle</p>
+                
+                <div class="form-group">
+                    <label for="date-regles">Date de vos dernières règles</label>
+                    <input type="date" id="date-regles">
+                </div>
+                
+                <div class="form-group">
+                    <label for="duree-cycle">Durée de votre cycle (jours)</label>
+                    <input type="number" id="duree-cycle" value="28" min="21" max="35">
+                </div>
+                
+                <div class="form-group">
+                    <label for="duree-regles">Durée de vos règles (jours)</label>
+                    <input type="number" id="duree-regles" value="5" min="3" max="7">
+                </div>
+                
+                <button class="primary-btn" id="calc-btn">Calculer</button>
+                
+                <div id="resultat" class="resultat hidden">
+                    <h3>Vos résultats</h3>
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">Phase actuelle</span>
+                            <span class="result-value" id="phase-actuelle"></span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Jour du cycle</span>
+                            <span class="result-value" id="jour-cycle"></span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Prochaine ovulation</span>
+                            <span class="result-value" id="prochaine-ovulation"></span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Prochaines règles</span>
+                            <span class="result-value" id="prochaines-regles"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories">
+        <div class="container">
+            <h2>Explorez Femora</h2>
+            <div class="categories-grid">
+                <div class="category-card reveal">
+                    <div class="category-icon">🌸</div>
+                    <h3>Santé Intime</h3>
+                    <p>Conseils et réponses pour prendre soin de vous</p>
+                </div>
+                <div class="category-card reveal">
+                    <div class="category-icon">✨</div>
+                    <h3>Routines par phase</h3>
+                    <p>Adaptez votre quotidien à votre cycle</p>
+                </div>
+                <div class="category-card reveal">
+                    <div class="category-icon">🍃</div>
+                    <h3>Recettes naturelles</h3>
+                    <p>Nutrition adaptée à chaque phase</p>
+                </div>
+                <div class="category-card reveal">
+                    <div class="category-icon">📚</div>
+                    <h3>Articles éducatifs</h3>
+                    <p>Comprendre son corps en profondeur</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="routines">
+        <div class="container">
+            <h2>Routines par phase du cycle</h2>
+            <p class="section-subtitle">Vivez chaque phase en harmonie avec votre corps</p>
+            
+            <div class="phases-container">
+                <div class="phase-block menstruelle reveal">
+                    <h3>Phase Menstruelle</h3>
+                    <p>Repos, introspection et douceur. Écoutez votre corps et prenez soin de vous.</p>
+                </div>
+                
+                <div class="phase-block folliculaire reveal">
+                    <h3>Phase Folliculaire</h3>
+                    <p>Énergie montante, créativité. C'est le moment d'initier de nouveaux projets.</p>
+                </div>
+                
+                <div class="phase-block ovulation reveal">
+                    <h3>Ovulation</h3>
+                    <p>Pic d'énergie et de sociabilité. Profitez de cette période dynamique.</p>
+                </div>
+                
+                <div class="phase-block luteale reveal">
+                    <h3>Phase Lutéale</h3>
+                    <p>Ralentissement progressif. Finalisez vos projets et préparez le repos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="premium">
+        <div class="container premium-content">
+            <h2>Débloquez l'expérience Femora Premium</h2>
+            <ul class="premium-list">
+                <li>Prédictions avancées de votre cycle</li>
+                <li>Routines personnalisées selon vos symptômes</li>
+                <li>Recettes adaptées à chaque phase</li>
+                <li>Accès illimité aux articles experts</li>
+                <li>Support personnalisé</li>
+            </ul>
+            <button class="premium-btn">Découvrir Premium</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; Femora</p>
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
