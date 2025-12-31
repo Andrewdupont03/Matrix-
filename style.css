@@ -62,6 +62,16 @@ nav {
     gap: 30px;
 }
 
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--accent-cta);
+    cursor: pointer;
+    padding: 5px;
+}
+
 nav a {
     color: var(--gris-fonce);
     text-decoration: none;
@@ -484,25 +494,55 @@ footer {
 
 @media (max-width: 768px) {
     header .container {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
         gap: 15px;
         padding: 15px 20px;
+        position: relative;
     }
     
     .logo {
         font-size: 24px;
-        width: 100%;
-        text-align: center;
+        width: auto;
+        text-align: left;
+    }
+    
+    .menu-toggle {
+        display: block;
+        order: 2;
     }
     
     nav {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--blanc);
+        flex-direction: column;
+        gap: 0;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    
+    nav.active {
+        display: flex;
+    }
+    
+    nav a {
+        padding: 15px;
+        border-bottom: 1px solid var(--gris-clair);
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    nav a:last-child {
+        border-bottom: none;
     }
     
     .cta-btn {
-        width: 100%;
-        max-width: 300px;
+        display: none;
     }
     
     #hero {
