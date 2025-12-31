@@ -101,10 +101,9 @@ nav a:hover {
 
 /* Hero Section */
 #hero {
+    background: linear-gradient(135deg, var(--rose-doux) 0%, var(--violet-lavande) 100%);
     padding: 120px 20px;
     text-align: center;
-    background-image: url(rose.jpg);
-    background-position: center;
 }
 
 .hero-content {
