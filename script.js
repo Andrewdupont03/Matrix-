@@ -8,9 +8,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            // Fermer le menu mobile après clic
+            const nav = document.getElementById('nav-menu');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
         }
     });
 });
+
+// Menu burger mobile
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        // Changer l'icône
+        if (navMenu.classList.contains('active')) {
+            menuToggle.textContent = '✕';
+        } else {
+            menuToggle.textContent = '☰';
+        }
+    });
+}
 
 // Animation au scroll avec IntersectionObserver
 const observerOptions = {
