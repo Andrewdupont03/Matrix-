@@ -42,7 +42,11 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Ajouter la classe active quand visible
             entry.target.classList.add('active');
+        } else {
+            // Retirer la classe active quand invisible (pour réactiver l'animation)
+            entry.target.classList.remove('active');
         }
     });
 }, observerOptions);
